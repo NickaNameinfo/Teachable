@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "teachabledatabase",
-    "host": "localhost",
+    "username": "apelixco_Teachh",
+    "password": "apelixco_Teachh@+",
+    "database": "apelixco_Teachable",
+    "host": "www.krosum.com",
     "dialect": "mysql"
   },
   "test": {

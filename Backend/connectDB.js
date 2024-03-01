@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("teachabledatabase", "root", null, {
-  host: "localhost",
+const sequelize = new Sequelize("apelixco_Teachable", "apelixco_Teachh", "apelixco_Teachh@+", {
+  host: "www.krosum.com",
   dialect: "mysql",
   logging: false,
 });
