@@ -1,15 +1,15 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
-  "u490757224_teachable",
-  "u490757224_teachable",
-  "LgQkkGe]1",
+  "u490757224_nickteachable",
+  "u490757224_nickteachableu",
+  "[a?yi[5Cw",
   {
-    host: "krosumschool.in",
+    host: "nicknameinfotech.com",
     dialect: "mysql",
     logging: false,
   }
-); 
+);
 
 const connect = async () => {
   try {
