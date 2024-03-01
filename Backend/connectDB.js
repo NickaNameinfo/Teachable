@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
     dialect: "mysql",
     logging: false,
   }
-);
+); 
 
 const connect = async () => {
   try {
