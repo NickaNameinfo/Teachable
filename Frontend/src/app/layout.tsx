@@ -26,15 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider
-          store={store}
-          children={
-            <>
-              <NavBar />
-              <Main children={children} />
-            </>
-          }
-        />
+        <Provider store={store}>
+          {" "}
+          <>
+            <NavBar />
+            <Main children={children} />
+          </>
+        </Provider>
         <script src="/js/vendor/modernizr-3.5.0.min.js"></script>
         <script src="/js/vendor/jquery-3.6.0.min.js"></script>
         <script src="/js/popper.min.js"></script>

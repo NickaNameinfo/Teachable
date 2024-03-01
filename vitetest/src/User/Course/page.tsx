@@ -1,15 +1,9 @@
-"use client";
-import {
-  useGetCheckOutCouresQuery,
-  useGetCouresQuery,
-  useGetSessionQuery,
-  useGetWatchlistdQuery,
-} from "@/app/Services/courses";
-import Link from "next/link";
 import * as React from "react";
-import { infoData } from "../../../../configData";
+import { infoData } from "../../configData";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/Store";
+import { RootState } from "../../Store";
+import { useGetCheckOutCouresQuery, useGetCouresQuery, useGetSessionQuery, useGetWatchlistdQuery } from "../../Services/courses";
+import { Link } from "react-router-dom";
 
 const Course = () => {
   const userInfo = useSelector((state: RootState) => state.loginState.userInfo);
@@ -130,7 +124,7 @@ const Course = () => {
                           <div className="gridarea__img">
                             {result?.uploadCourse && (
                               <Link
-                                href={`/Courses/CourseDetails/${result?.id}`}
+                                to={`/Courses/CourseDetails/?id=${result?.id}`}
                               >
                                 <video
                                   // controls
@@ -154,7 +148,7 @@ const Course = () => {
                               </div>
                             </div>
                             {/* <div className="gridarea__small__icon">
-                                  <Link href="#">
+                                  <Link to="#">
                                     <i className="icofont-heart-alt" />
                                   </Link>
                                 </div> */}
@@ -176,18 +170,18 @@ const Course = () => {
                             <div className="gridarea__heading">
                               <h3>
                                 <Link
-                                  href={`/Courses/CourseDetails/${result?.id}`}
+                                  to={`/Courses/CourseDetails/?id=${result?.id}`}
                                 >
                                   {result?.courseTitle}{" "}
                                 </Link>
                               </h3>
                             </div>
                             <div className="gridarea__bottom">
-                              <Link href="#">
+                              <Link to="#">
                                 <div className="gridarea__small__img">
                                   {/* <img
                                         loading="lazy"
-                                        src="../img/grid/grid_small_1.jpg"
+                                        src=".././src/assets/img/grid/grid_small_1.jpg"
                                         alt="grid"
                                       /> */}
                                   <div className="gridarea__small__content">
@@ -232,13 +226,13 @@ const Course = () => {
                             {completionData?.find(
                               (item) => item.courseId === result?.id
                             )?.completionPercentage === "100" ? (
-                              <Link className="default__button" href={`#`}>
+                              <Link className="default__button" to={`#`}>
                                 Download Certification
                               </Link>
                             ) : (
                               <Link
                                 className="default__button"
-                                href={`/Courses/CourseDetails/${result?.id}`}
+                                to={`/Courses/CourseDetails/?id=${result?.id}`}
                               >
                                 Complete Course
                               </Link>
