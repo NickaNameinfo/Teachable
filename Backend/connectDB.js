@@ -1,10 +1,15 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("apelixco_Teachable", "apelixco_Teachh", "apelixco_Teachh@+", {
-  host: "www.krosum.com",
-  dialect: "mysql",
-  logging: false,
-});
+const sequelize = new Sequelize(
+  "u490757224_teachable",
+  "u490757224_teachable",
+  "LgQkkGe]1",
+  {
+    host: "krosumschool.in",
+    dialect: "mysql",
+    logging: false,
+  }
+);
 
 const connect = async () => {
   try {
