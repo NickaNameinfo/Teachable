@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "apelixco_Teachh",
-    "password": "apelixco_Teachh@+",
-    "database": "apelixco_Teachable",
-    "host": "www.krosum.com",
+    "username": "u490757224_nickteachableu",
+    "password": "[a?yi[5Cw",
+    "database": "u490757224_nickteachable",
+    "host": "nicknameinfotech.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "apelixco_Teachh",
-    "password": "apelixco_Teachh@+",
-    "database": "apelixco_Teachable",
-    "host": "www.krosum.com",
+    "username": "u490757224_nickteachableu",
+    "password": "[a?yi[5Cw",
+    "database": "u490757224_nickteachable",
+    "host": "nicknameinfotech.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "apelixco_Teachh",
-    "password": "apelixco_Teachh@+",
-    "database": "apelixco_Teachable",
-    "host": "www.krosum.com",
+    "username": "u490757224_nickteachableu",
+    "password": "[a?yi[5Cw",
+    "database": "u490757224_nickteachable",
+    "host": "nicknameinfotech.com",
     "dialect": "mysql"
   }
 }
