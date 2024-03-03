@@ -68,26 +68,36 @@ const courseController = {
     }
   },
   updateById: async (req, res, next) => {
-    const { originalname, buffer } = req.file;
-    const uploadParams = {
-      Bucket: BUCKET_NAME, // Replace with your S3 bucket name
-      Key: originalname,
-      Body: buffer,
-    };
-    try {
+    if (req.file) {
+      const { originalname, buffer } = req.file;
+      const uploadParams = {
+        Bucket: BUCKET_NAME, // Replace with your S3 bucket name
+        Key: originalname,
+        Body: buffer,
+      };
       const uploadCommand = new PutObjectCommand(uploadParams);
       const result = await s3Client.send(uploadCommand);
       const url = `https://${BUCKET_NAME}.s3.ap-south-1.amazonaws.com/${originalname}`;
       console.log("File uploaded successfully:", url);
+
+      try {
+        const { id } = req.params;
+        let inputData = {
+          ...req.body,
+          uploadCourse: url,
+        };
+        const data = await courseService.updateById(id, inputData);
+        return res.json({ success: true, data });
+      } catch (error) {
+        next(error);
+      }
+    } else {
       const { id } = req.params;
       let inputData = {
         ...req.body,
-        uploadCourse: url,
       };
       const data = await courseService.updateById(id, inputData);
       return res.json({ success: true, data });
-    } catch (error) {
-      next(error);
     }
   },
   deleteById: async (req, res, next) => {
