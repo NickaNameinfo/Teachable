@@ -193,7 +193,7 @@ const CourseDetails = ({ params }: { params: { slug: string } }) => {
                                           height="400"
                                         >
                                           <source
-                                            src={`${infoData?.baseApi}/${result?.sessionUrl}`}
+                                            src={`${result?.sessionUrl}`}
                                             type="video/mp4"
                                           />
                                           Your browser does not support the

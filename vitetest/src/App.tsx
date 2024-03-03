@@ -13,7 +13,15 @@ import CreateCourse from "./Dashboard/Course/CreateCourse/[slug]/page";
 import UploadSession from "./Dashboard/Course/UploadSession/page";
 import AdminCourseDetails from "./Dashboard/Course/CourseDetails/[slug]/page";
 import HomePage from "./HomePage/page";
+import { useDispatch } from "react-redux";
+import { login } from "./Login/loginSlice";
 function App() {
+  const dispatch = useDispatch();
+  const localData = localStorage.getItem("loginInfo");
+  dispatch(
+    login(localData ? JSON.parse(localStorage.getItem("loginInfo")) : null)
+  );
+
   return (
     <Router>
       <NavBar />

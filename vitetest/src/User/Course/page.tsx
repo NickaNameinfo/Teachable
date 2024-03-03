@@ -2,7 +2,12 @@ import * as React from "react";
 import { infoData } from "../../configData";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Store";
-import { useGetCheckOutCouresQuery, useGetCouresQuery, useGetSessionQuery, useGetWatchlistdQuery } from "../../Services/courses";
+import {
+  useGetCheckOutCouresQuery,
+  useGetCouresQuery,
+  useGetSessionQuery,
+  useGetWatchlistdQuery,
+} from "../../Services/courses";
 import { Link } from "react-router-dom";
 
 const Course = () => {
@@ -119,7 +124,10 @@ const Course = () => {
                 <div className="row">
                   <div className="row">
                     {enrolledCourse?.map((result) => (
-                      <div className="col-xl-4 col-lg-6 col-md-6 col-12" key={result.id}>
+                      <div
+                        className="col-xl-4 col-lg-6 col-md-6 col-12"
+                        key={result.id}
+                      >
                         <div className="gridarea__wraper">
                           <div className="gridarea__img">
                             {result?.uploadCourse && (
@@ -135,7 +143,7 @@ const Course = () => {
                                   playsInline={true}
                                 >
                                   <source
-                                    src={`${infoData?.baseApi}/${result?.uploadCourse}`}
+                                    src={`${result?.uploadCourse}`}
                                     type="video/mp4"
                                   />
                                   Your browser does not support the video tag.
