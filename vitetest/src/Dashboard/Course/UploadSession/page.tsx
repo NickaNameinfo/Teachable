@@ -10,6 +10,7 @@ import {
 
 const UploadSession = () => {
   const navigate = useNavigate();
+  const [loding, setLoding] = React.useState(false);
   const {
     data: courseData,
     error: courseError,
@@ -26,6 +27,7 @@ const UploadSession = () => {
 
   const onSubmit = async (data) => {
     console.log(data, "data");
+    setLoding(true);
     const formData = new FormData();
     for (const key in data) {
       formData.append(key, data[key]);
@@ -35,6 +37,8 @@ const UploadSession = () => {
       if (!result?.["data"]?.success) {
         alert("Session Title already exist");
       } else {
+        setLoding(false);
+        alert("Session uploaded successfully");
         navigate("/Dashboard/Course/CourseList");
       }
     } catch (error) {
@@ -46,7 +50,7 @@ const UploadSession = () => {
     <div className="col-xl-6 offset-md-3">
       <div className="loginarea__wraper">
         <div className="login__heading">
-          <h5 className="login__title">Upload Seeion</h5>
+          <h5 className="login__title">Upload Session </h5>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
@@ -154,7 +158,9 @@ const UploadSession = () => {
           </div>
           <div className="login__button">
             <div className="create__course__bottom__button">
-              <button type="submit">Upload</button>
+              <button type="submit" disabled={loding ? true : false}>
+                {loding ? "Uploading..." : "Upload"}
+              </button>
             </div>
           </div>
         </form>

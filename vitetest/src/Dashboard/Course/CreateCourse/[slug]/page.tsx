@@ -240,7 +240,7 @@ const CreateCourse = () => {
                                 </div>
                               </div>
                               <div className="row">
-                                <div className="col-xl-4 col-lg-4 col-md-4 col-12">
+                                {/* <div className="col-xl-4 col-lg-4 col-md-4 col-12">
                                   <div className="dashboard__select__heading">
                                     <span>Courses</span>
                                   </div>
@@ -283,8 +283,8 @@ const CreateCourse = () => {
                                       </p>
                                     )}
                                   </div>
-                                </div>
-                                <div className="col-xl-4 col-lg-4 col-md-6 col-12">
+                                </div> */}
+                                <div className="col-xl-6 col-lg-4 col-md-6 col-12">
                                   <div className="dashboard__select__heading">
                                     <span>SHORT BY OFFER</span>
                                   </div>
@@ -312,7 +312,7 @@ const CreateCourse = () => {
                                     )}
                                   </div>
                                 </div>
-                                <div className="col-xl-4 col-lg-4 col-md-6 col-12">
+                                <div className="col-xl-6 col-lg-4 col-md-6 col-12">
                                   <div className="dashboard__select__heading">
                                     <span>Course Status</span>
                                   </div>

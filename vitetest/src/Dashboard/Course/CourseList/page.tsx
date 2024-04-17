@@ -57,16 +57,17 @@ const CourseList = () => {
   }
 
   const handleDelete = async (courseId) => {
-    console.log(courseId, "courseIdsdfas");
-    try {
-      // Call the delete mutation
-      const result = deleteCourse(courseId);
-      // If successful, refetch the course data
-      if (result) {
-        refetch();
+    var result = confirm("Want to delete?");
+    if (result) {
+      console.log(courseId, "courseIdsdfas");
+      try {
+        // Call the delete mutation
+        deleteCourse(courseId);
+        // If successful, refetch the course data
+        location.reload();
+      } catch (error) {
+        console.error("Error deleting course:", error);
       }
-    } catch (error) {
-      console.error("Error deleting course:", error);
     }
   };
 

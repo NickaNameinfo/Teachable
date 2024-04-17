@@ -51,11 +51,11 @@ const Course = () => {
     // Calculate completion percentage for each course in data1
     const calculateCompletionPercentage = (courseId) => {
       let courseData1 = watchlisted?.["data"]?.data?.filter(
-        (item) => item.courseId === courseId
+        (item) => item?.courseId === courseId
       );
-      let totalSessions = groupedData?.[courseId].items.length;
-      let completedSessions = courseData1.filter(
-        (item) => item.sessionStatus === "Completed"
+      let totalSessions = groupedData?.[courseId]?.items?.length;
+      let completedSessions = courseData1?.filter(
+        (item) => item?.sessionStatus === "Completed"
       ).length;
       let completionPercentage = (completedSessions / totalSessions) * 100;
 
@@ -64,7 +64,7 @@ const Course = () => {
 
     // Create an array with completion data for each course
     const completionDataArray = watchlisted?.["data"]?.data?.map((item) => {
-      let courseId = item.courseId;
+      let courseId = item?.courseId;
       let completionPercentage = calculateCompletionPercentage(courseId);
       return {
         courseId,
