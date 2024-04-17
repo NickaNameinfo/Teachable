@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import { NavBar } from "./Components/NavBar/NavBar";
 import Login from "./Login/page";
 import Courses from "./Courses/[slug]/page";
@@ -15,9 +20,11 @@ import AdminCourseDetails from "./Dashboard/Course/CourseDetails/[slug]/page";
 import HomePage from "./HomePage/page";
 import { useDispatch } from "react-redux";
 import { login } from "./Login/loginSlice";
+import React from "react";
 function App() {
   const dispatch = useDispatch();
   const localData = localStorage.getItem("loginInfo");
+
   dispatch(
     login(localData ? JSON.parse(localStorage.getItem("loginInfo")) : null)
   );

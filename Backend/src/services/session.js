@@ -19,11 +19,7 @@ const checkoutService = {
           offset: (page - 1) * limit,
           limit,
         };
-
-        if (orderBy && orderBy === "created_at") {
-          queries.order = [["created_at", "ASC"]]; // sortBy should be 'ASC' or 'DESC'
-        }
-
+        queries.order = [["created_at", "ASC"]]; // sortBy should be 'ASC' or 'DESC'
         const data = await Sessions.findAndCountAll({
           where: query,
           ...queries,

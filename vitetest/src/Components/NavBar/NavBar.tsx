@@ -1,12 +1,22 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store";
 import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../Login/loginSlice";
 
 export const NavBar = () => {
   const userInfo = useSelector((state: RootState) => state.loginState.userInfo);
-  console.log(userInfo , "3254523")
+  console.log(userInfo, "3254523");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const localData = localStorage.getItem("loginInfo");
+
+  React.useEffect(() => {
+    if (!localData) {
+      navigate("/Login");
+    }
+  }, [localData, userInfo]);
   return (
     <>
       <header>
@@ -109,9 +119,8 @@ export const NavBar = () => {
                       <i
                         className="icofont-logout cursor-pointer"
                         onClick={() => {
-                          location.reload();
                           localStorage.removeItem("loginInfo");
-                          navigate("/");
+                          dispatch(login(null));
                         }}
                       ></i>
                     ) : (
@@ -129,7 +138,11 @@ export const NavBar = () => {
               <div className="col-6">
                 <div className="mobile-logo">
                   <Link className="logo__dark" to="#">
-                    <img loading="lazy" src="/./src/assets/img/logo/logo_1.png" alt="logo" />
+                    <img
+                      loading="lazy"
+                      src="/./src/assets/img/logo/logo_1.png"
+                      alt="logo"
+                    />
                   </Link>
                 </div>
               </div>
