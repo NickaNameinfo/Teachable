@@ -20,8 +20,8 @@ const checkoutService = {
           limit,
         };
 
-        if (orderBy) {
-          queries.order = [[orderBy, sortBy]];
+        if (orderBy && orderBy === "created_at") {
+          queries.order = [["created_at", "ASC"]]; // sortBy should be 'ASC' or 'DESC'
         }
 
         const data = await Sessions.findAndCountAll({
@@ -47,12 +47,14 @@ const checkoutService = {
           where: {
             course_id: courseId,
           },
+          order: [["created_at", "ASC"]], // Order by created_at in ASC
         });
 
-        if (!data)
+        if (!data || data.length === 0) {
           throw new NotFoundException(
             "Session not found for the given course ID!"
           );
+        }
 
         resolve(data);
       } catch (error) {

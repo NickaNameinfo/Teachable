@@ -1,11 +1,11 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
-  "u490757224_nickteachable",
-  "u490757224_nickteachableu",
-  "[a?yi[5Cw",
+  "teachabledatabase",
+  "root",
+  "",
   {
-    host: "nicknameinfotech.com",
+    host: "localhost",
     dialect: "mysql",
     logging: false,
   }
