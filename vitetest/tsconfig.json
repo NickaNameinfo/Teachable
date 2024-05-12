@@ -21,6 +21,6 @@
     "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "razorpay.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -23,6 +23,22 @@ const CheckOut = () => {
     formState: { errors },
   } = useForm();
 
+  const [scriptLoaded, setScriptLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    script.onload = () => {
+      setScriptLoaded(true);
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   React.useEffect(() => {
     if (!userInfo) {
       navigate("/Login");
@@ -30,6 +46,39 @@ const CheckOut = () => {
   }, []);
 
   const onSubmit = async (formData) => {
+    console.log(formData, "formData324523");
+    if (scriptLoaded) {
+      const options = {
+        key: "rzp_live_CYbOpmWaZHk54C",
+        amount: courseData?.data?.coursePrice * 100, // amount in paisa
+        currency: "INR",
+        name: "Krosume",
+        description: "For Course Payment",
+        image: "../src/assets/img/logo/logo_1.png",
+        handler: function (response: any) {
+          console.log(response, "43523response");
+          const paymentId = response.razorpay_payment_id;
+          if (paymentId) {
+            afterPaymentSuccess(formData);
+          }
+        },
+        prefill: {
+          name: `${formData?.firstName} ${formData?.lastName}`,
+          email: formData?.emailId,
+          contact: formData?.phoneNumber,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } else {
+      console.error("Razorpay script not loaded");
+    }
+  };
+
+  const afterPaymentSuccess = async (formData) => {
     try {
       let tempData = {
         ...formData,
@@ -168,6 +217,24 @@ const CheckOut = () => {
                       </div>
                       <div className="col-xl-6">
                         <div className="checkoutarea__inputbox">
+                          <label htmlFor="email__address">Phome Number*</label>
+                          <Controller
+                            name="phoneNumber"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                              <input type="number" {...field} />
+                            )}
+                          />
+                          {errors.phoneNumber?.type === "required" && (
+                            <p role="alert" className="error">
+                              Field is required
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="col-xl-6">
+                        <div className="checkoutarea__inputbox">
                           <label htmlFor="address__info">Address *</label>
                           <Controller
                             name="address"
@@ -184,7 +251,7 @@ const CheckOut = () => {
                           )}
                         </div>
                       </div>
-                      <div className="col-xl-12">
+                      <div className="col-xl-6">
                         <div className="checkoutarea__inputbox">
                           <label htmlFor="town__city">Town/City *</label>
                           <Controller
@@ -252,7 +319,7 @@ const CheckOut = () => {
                               Course Cost :
                             </td>
                             <td className="checkoutarea__cgt__des prc-total">
-                              {courseData?.data?.coursePrice}
+                              RS: {courseData?.data?.coursePrice}
                             </td>
                           </tr>
                         </tbody>
@@ -261,19 +328,9 @@ const CheckOut = () => {
                   </div>
                   <div className="checkoutarea__payment clearfix">
                     <div className="checkoutarea__payment__toggle">
-                      <div className="checkoutarea__payment__total">
-                        <div className="checkoutarea__payment__type">
-                          <input type="radio" id="pay-toggle03" name="pay" />
-                          <label htmlFor="pay-toggle03">Cash on Delivery</label>
-                        </div>
-                        <div className="checkoutarea__payment__type">
-                          <input type="radio" id="pay-toggle04" name="pay" />
-                          <label htmlFor="pay-toggle04">Paypal</label>
-                        </div>
-                      </div>
                       <div className="checkoutarea__payment__input__box">
                         <button className="default__button" type="submit">
-                          Place order
+                          Get Course
                         </button>
                       </div>
                     </div>
