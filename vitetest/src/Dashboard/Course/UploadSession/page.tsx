@@ -42,6 +42,7 @@ const UploadSession = () => {
   } = useForm();
 
   React.useEffect(() => {
+    getSessionRefetch()
     if (id) {
       setValue("sessionTitle", getSession?.["data"]?.sessionTitle);
       setValue("sessionTime", getSession?.["data"]?.sessionTime);
