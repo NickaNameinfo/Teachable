@@ -42,13 +42,12 @@ const UploadSession = () => {
   } = useForm();
 
   React.useEffect(() => {
-    getSessionRefetch()
-    if (id) {
+    if (getSession?.["data"]) {
       setValue("sessionTitle", getSession?.["data"]?.sessionTitle);
       setValue("sessionTime", getSession?.["data"]?.sessionTime);
       setValue("courseId", getSession?.["data"]?.courseId);
     }
-  }, [id]);
+  }, [getSession]);
 
   const onSubmit = async (data) => {
     console.log(data, "data");
