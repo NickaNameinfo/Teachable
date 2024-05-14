@@ -39,7 +39,9 @@ const sessionController = {
   findById: async (req, res, next) => {
     try {
       const { id } = req.params;
+      // console.log(id, "seesionIdss")
       const data = await sessionService.findById(id);
+      // console.log(data, "responssdata")
       return res.json({ success: true, data });
     } catch (error) {
       next(error);
@@ -56,7 +58,7 @@ const sessionController = {
   },
   create: async (req, res, next) => {
     console.log(req.body, "test123412341234");
-    const { originalname, buffer } = req.file;
+    const { originalname, buffer } = req?.file;
     const uploadParams = {
       Bucket: BUCKET_NAME, // Replace with your S3 bucket name
       Key: originalname,
@@ -80,24 +82,23 @@ const sessionController = {
     }
   },
   updateById: async (req, res, next) => {
-    const { originalname, buffer } = req.file;
-    // Compress image using sharp without changing quality
-    const compressedBuffer = await sharp(buffer).toBuffer();
-    const uploadParams = {
-      Bucket: BUCKET_NAME, // Replace with your S3 bucket name
-      Key: originalname,
-      Body: compressedBuffer,
-    };
+    // const { originalname, buffer } = req?.file;
+    // // Compress image using sharp without changing quality
+    // const compressedBuffer = await sharp(buffer).toBuffer();
+    // const uploadParams = {
+    //   Bucket: BUCKET_NAME, // Replace with your S3 bucket name
+    //   Key: originalname,
+    //   Body: compressedBuffer,
+    // };
 
     try {
-      const uploadCommand = new PutObjectCommand(uploadParams);
-      const result = await s3Client.send(uploadCommand);
-      const url = `https://${BUCKET_NAME}.s3.ap-south-1.amazonaws.com/${originalname}`;
-      console.log("Filestuts:", url);
+      // const uploadCommand = new PutObjectCommand(uploadParams);
+      // const result = await s3Client.send(uploadCommand);
+      // const url = `https://${BUCKET_NAME}.s3.ap-south-1.amazonaws.com/${originalname}`;
+      // console.log("Filestuts:", url);
       const { id } = req.params;
       let inputData = {
         ...req.body,
-        sessionUrl: url,
       };
       const data = await sessionService.updateById(id, inputData);
       return res.json({ success: true, data });

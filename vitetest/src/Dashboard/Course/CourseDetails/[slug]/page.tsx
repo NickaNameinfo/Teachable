@@ -1,6 +1,6 @@
 import * as React from "react";
 import { infoData } from "../../../../configData";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   useGetCouresIdQuery,
   useGetSessionQuery,
@@ -14,7 +14,7 @@ const AdminCourseDetails = () => {
   const [sessionList, setSessionsList] = React.useState(null);
   const [videoUrl, setVideoUrl] = React.useState(null);
   console.log(sessionList, videoUrl);
-
+  const navigate = useNavigate();
   React.useEffect(() => {
     let tempDate = sessionData?.["data"]?.data?.filter(
       (item) => item.courseId === courseData?.data?.id
@@ -160,12 +160,35 @@ const AdminCourseDetails = () => {
                                         className="accordion-button justify-between"
                                         type="button"
                                       >
-                                        <div>
-                                          {result?.sessionTitle}{" "}
+                                        <div className="d-flex">
+                                          <span
+                                            style={{
+                                              background: "none",
+                                              fontSize: "13px",
+                                              borderRadius: "0px",
+                                              display: "block",
+                                              whiteSpace: "nowrap",
+                                              overflow: "hidden",
+                                              textOverflow: "ellipsis",
+                                              width: "250px",
+                                            }}
+                                          >
+                                            {result?.sessionTitle}
+                                          </span>
                                           <span>{`Duration : ${result?.sessionTime}`}</span>
                                           <span>{`Lession : ${
                                             index + 1
                                           }`}</span>
+                                          <span
+                                            onClick={() =>
+                                              navigate(
+                                                `/Dashboard/Course/UploadSession/?id=${result?.id}`
+                                              )
+                                            }
+                                          >
+                                            <i className="icofont-edit cursor-pointer" />{" "}
+                                            Edit
+                                          </span>
                                         </div>
                                         <span
                                           className="question"

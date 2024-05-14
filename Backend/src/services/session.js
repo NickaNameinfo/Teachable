@@ -36,6 +36,17 @@ const checkoutService = {
         reject(error);
       }
     }),
+  findById: (id) =>
+    new Promise(async (resolve, reject) => {
+      try {
+        const data = await Sessions.findByPk(id);
+        if (!data) throw new NotFoundException("Not found session!");
+
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    }),
   findByCourseId: (courseId) =>
     new Promise(async (resolve, reject) => {
       try {
@@ -86,8 +97,8 @@ const checkoutService = {
   updateById: (id, body) =>
     new Promise(async (resolve, reject) => {
       try {
-        const Sessions = await Sessions.findByPk(id);
-        if (!Sessions) throw new NotFoundException("Not found Sessions!");
+        const SessionsResult = await Sessions.findByPk(id);
+        if (!SessionsResult) throw new NotFoundException("Not found Sessions!");
 
         const data = await Sessions.update(body, {
           where: {
@@ -103,8 +114,8 @@ const checkoutService = {
   deleteById: (id) =>
     new Promise(async (resolve, reject) => {
       try {
-        const Sessions = await Sessions.findByPk(id);
-        if (!Sessions) throw new NotFoundException("Not found Sessions!");
+        const SessionsResult = await Sessions.findByPk(id);
+        if (!SessionsResult) throw new NotFoundException("Not found Sessions!");
 
         const data = await Sessions.destroy({
           where: {

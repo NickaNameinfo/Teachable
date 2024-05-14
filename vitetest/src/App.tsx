@@ -48,7 +48,7 @@ function App() {
           element={<CreateCourse />}
         />
         <Route
-          path="/Dashboard/Course/UploadSession"
+          path="/Dashboard/Course/UploadSession/:id?"
           element={<UploadSession />}
         />
         <Route

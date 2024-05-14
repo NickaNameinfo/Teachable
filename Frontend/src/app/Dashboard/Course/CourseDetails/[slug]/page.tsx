@@ -165,7 +165,14 @@ const CourseDetails = ({ params }: { params: { slug: string } }) => {
                                           <span>{`Lession : ${
                                             index + 1
                                           }`}</span>
+                                           <span
+                                          className="question"
+                                        >
+                                          <i className="icofont-edit cursor-pointer" />{" "}
+                                          Edit
+                                        </span>
                                         </div>
+                                       
                                         <span
                                           className="question"
                                           data-bs-toggle="collapse"

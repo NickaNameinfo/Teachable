@@ -2,14 +2,19 @@ import axios from "axios";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { infoData } from "../../../configData";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   useAddSessionMutation,
   useGetCouresQuery,
+  useGetSessionByIdQuery,
+  useUpdateSessionMutation,
 } from "../../../Services/courses";
 
 const UploadSession = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const id: any = searchParams.get("id");
+
   const [loding, setLoding] = React.useState(false);
   const {
     data: courseData,
@@ -17,29 +22,63 @@ const UploadSession = () => {
     isLoading: courseLoading,
     refetch,
   } = useGetCouresQuery();
+  const {
+    data: getSession,
+    error: getSessionError,
+    isLoading: getSessionLoading,
+    refetch: getSessionRefetch,
+  } = useGetSessionByIdQuery(id);
   const [addSession] = useAddSessionMutation();
+  const [updateSession] = useUpdateSessionMutation();
+
+  console.log(id, "id4353", getSession);
+
   const {
     handleSubmit: handleSubmit,
     control: control,
     watch,
+    setValue,
     formState: { errors: errors },
   } = useForm();
+
+  React.useEffect(() => {
+    if (id) {
+      setValue("sessionTitle", getSession?.["data"]?.sessionTitle);
+      setValue("sessionTime", getSession?.["data"]?.sessionTime);
+      setValue("courseId", getSession?.["data"]?.courseId);
+    }
+  }, [id]);
 
   const onSubmit = async (data) => {
     console.log(data, "data");
     setLoding(true);
-    const formData = new FormData();
+    const formData: any = new FormData();
     for (const key in data) {
       formData.append(key, data[key]);
     }
     try {
-      const result = await addSession(formData);
-      if (!result?.["data"]?.success) {
-        alert("Session Title already exist");
+      if (id) {
+        const updateResult = await updateSession({
+          body: formData,
+          id: id,
+        });
+        console.log(updateResult, "updateResult4532");
+        if (!updateResult?.["data"]?.success) {
+          alert("Session Title already exist");
+        } else {
+          setLoding(false);
+          alert("Session uploaded successfully");
+          navigate("/Dashboard/Course/CourseList");
+        }
       } else {
-        setLoding(false);
-        alert("Session uploaded successfully");
-        navigate("/Dashboard/Course/CourseList");
+        const result = await addSession(formData);
+        if (!result?.["data"]?.success) {
+          alert("Session Title already exist");
+        } else {
+          setLoding(false);
+          alert("Session uploaded successfully");
+          navigate("/Dashboard/Course/CourseList");
+        }
       }
     } catch (error) {
       console.error("Error making POST request:", error);
@@ -129,37 +168,39 @@ const UploadSession = () => {
                 )}
               </div>
             </div>
-            <div className="col-xl-6">
-              <div className="login__form">
-                <label className="form__label">Seesion Video</label>
-                <Controller
-                  name="sessionUrl"
-                  control={control}
-                  rules={{
-                    required: "This field is required",
-                  }}
-                  render={({ field }) => (
-                    <input
-                      type={"file"}
-                      onChange={(e) => {
-                        console.log("Custom onChange:", e.target.files[0]);
-                        field.onChange(e.target.files[0]);
-                      }}
-                    />
+            {!id && (
+              <div className="col-xl-6">
+                <div className="login__form">
+                  <label className="form__label">Seesion Video</label>
+                  <Controller
+                    name="sessionUrl"
+                    control={control}
+                    rules={{
+                      required: "This field is required",
+                    }}
+                    render={({ field }) => (
+                      <input
+                        type={"file"}
+                        onChange={(e) => {
+                          console.log("Custom onChange:", e.target.files[0]);
+                          field.onChange(e.target.files[0]);
+                        }}
+                      />
+                    )}
+                  />
+                  {errors.sessionUrl && (
+                    <p role="alert" className="error">
+                      {String(errors.sessionUrl?.message)}
+                    </p>
                   )}
-                />
-                {errors.sessionUrl && (
-                  <p role="alert" className="error">
-                    {String(errors.sessionUrl?.message)}
-                  </p>
-                )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <div className="login__button">
             <div className="create__course__bottom__button">
               <button type="submit" disabled={loding ? true : false}>
-                {loding ? "Uploading..." : "Upload"}
+                {loding ? "Uploading..." : id ? "Update" : "Upload"}
               </button>
             </div>
           </div>

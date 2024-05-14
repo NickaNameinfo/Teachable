@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../Store";
-import {infoData} from "../configData.tsx";
+import { infoData } from "../configData.tsx";
 
 const axiosBaseQuery = fetchBaseQuery({
   baseUrl: infoData?.baseApi, // Set your base URL
@@ -29,6 +29,9 @@ export const api = createApi({
     }),
     getSession: builder.query<any[], void>({
       query: () => `/session`,
+    }),
+    getSessionById: builder.query<any[], void>({
+      query: (id) => `/session/${id}`,
     }),
     getCheckOutCoures: builder.query<any[], void>({
       query: () => `/checkout`,
@@ -101,6 +104,13 @@ export const api = createApi({
         body,
       }),
     }),
+    updateSession: builder.mutation<any, { body: any; id: any }>({
+      query: ({ body, id }) => ({
+        url: `/session/${id}`,
+        method: "PUT",
+        body,
+      }),
+    }),
     deleteCorse: builder.mutation({
       query: (id) => ({
         url: `/courses/${id}`,
@@ -136,6 +146,8 @@ export const {
   useGetWatchlistCouresIdQuery,
   useGetWatchlistdQuery,
   useGetFeebackCouresIdQuery,
-  useGetClarificationsQuery
+  useGetClarificationsQuery,
+  useGetSessionByIdQuery,
+  useUpdateSessionMutation
 } = api;
 export const { endpoints } = api;
