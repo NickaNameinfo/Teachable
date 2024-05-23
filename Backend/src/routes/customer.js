@@ -10,5 +10,6 @@ router.post("/:id/address", customerController.addNewAddress);
 router.post("/", customerController.create);
 router.put("/:id", customerController.updateById);
 router.delete("/:id", customerController.deleteById);
+router.post("/resetPassword", customerController.resetPassword);
 
 module.exports = router;

@@ -176,6 +176,22 @@ const customerService = {
         reject(error);
       }
     }),
+  resetPassword: (userName, newPassword) =>
+    new Promise(async (resolve, reject) => {
+      try {
+        const hashedPassword = bcrypt.hashSync(
+          newPassword,
+          bcrypt.genSaltSync(10)
+        );
+        await Customer.update(
+          { password: hashedPassword },
+          { where: { userName } }
+        );
+        resolve({ message: "Password has been reset." });
+      } catch (error) {
+        reject(error);
+      }
+    }),
 };
 
 module.exports = customerService;

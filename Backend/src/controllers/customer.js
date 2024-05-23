@@ -90,6 +90,16 @@ const customerController = {
       next(error);
     }
   },
+  resetPassword: async (req, res, next) => {
+    console.log(req.body, "dfasd")
+    try {
+      const { userName, password } = req.body;
+      const data = await customerService.resetPassword(userName, password);
+      return res.json({ success: true, data });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = customerController;
