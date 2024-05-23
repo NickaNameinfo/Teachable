@@ -10,6 +10,7 @@ const Login = () => {
   const userInfo = useSelector((state: RootState) => state.loginState.userInfo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const {
     handleSubmit: handleSubmitLogin,
     control: controlLogin,
@@ -45,6 +46,24 @@ const Login = () => {
       }
     } catch (error) {
       alert("User name or password is incorrect");
+    }
+  };
+  const changePassword = async (formData) => {
+    console.log(formData, "formDataformData");
+    try {
+      const response = await axios.post(
+        `${infoData?.baseApi}/customers/resetPassword`,
+        formData
+      );
+      console.log(formData, "formData32134", response);
+      if (response.data.success && !response?.data?.data?.error) {
+        alert("Paasword Reset Success");
+        location.reload()
+      } else {
+        alert("User name is incorrect");
+      }
+    } catch (error) {
+      alert("User name incorrect");
     }
   };
 
@@ -92,6 +111,16 @@ const Login = () => {
                     type="button"
                   >
                     Sing up
+                  </button>
+                </li>
+                <li className="nav-item" role="presentation">
+                  <button
+                    className="single__tab__link"
+                    data-bs-toggle="tab"
+                    data-bs-target="#projects__three"
+                    type="button"
+                  >
+                    Forget Password
                   </button>
                 </li>
               </ul>
@@ -155,15 +184,7 @@ const Login = () => {
                           </p>
                         )}
                       </div>
-                      <div className="login__form d-flex justify-content-between flex-wrap gap-2">
-                        <div className="form__check">
-                          <input id="forgot" type="checkbox" />
-                          <label htmlFor="forgot"> Remember me</label>
-                        </div>
-                        <div className="text-end login__form__link">
-                          <a href="#">Forgot your password?</a>
-                        </div>
-                      </div>
+
                       <div className="login__button">
                         <div className="create__course__bottom__button">
                           <button type="submit">Log In</button>
@@ -390,6 +411,69 @@ const Login = () => {
                       <div className="login__button">
                         <div className="create__course__bottom__button">
                           <button type="submit">Sign Up</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="tab-pane fade active show"
+                id="projects__three"
+                role="tabpanel"
+                aria-labelledby="projects__three"
+              >
+                <div className="col-xl-8 col-md-8 offset-md-2">
+                  <div className="loginarea__wraper">
+                    <div className="login__heading">
+                      <h5 className="login__title">Forget Password</h5>
+                    </div>
+                    <form onSubmit={handleSubmitLogin(changePassword)}>
+                      <div className="login__form">
+                        <label className="form__label">Username</label>
+                        <Controller
+                          name="userName"
+                          control={controlLogin}
+                          rules={{ required: true }}
+                          render={({ field }) => (
+                            <input
+                              type="text"
+                              className="common__login__input"
+                              placeholder="User Name"
+                              {...field}
+                            />
+                          )}
+                        />
+                        {errorsLogin.userName?.type === "required" && (
+                          <p role="alert" className="error">
+                            User name is required
+                          </p>
+                        )}
+                      </div>
+                      <div className="login__form">
+                        <label className="form__label">Password</label>
+                        <Controller
+                          name="password"
+                          control={controlLogin}
+                          rules={{ required: true }}
+                          render={({ field }) => (
+                            <input
+                              type="text"
+                              className="common__login__input"
+                              placeholder="Password"
+                              {...field}
+                            />
+                          )}
+                        />
+                        {errorsLogin.password?.type === "required" && (
+                          <p role="alert" className="error">
+                            Password is required
+                          </p>
+                        )}
+                      </div>
+                      <div className="login__button">
+                        <div className="create__course__bottom__button">
+                          <button type="submit">Update Password</button>
                         </div>
                       </div>
                     </form>
