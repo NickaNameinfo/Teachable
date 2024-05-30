@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "u490757224_nickteachableu",
-    "password": "[a?yi[5Cw",
+    "password": "=SYhqf9u",
     "database": "u490757224_nickteachable",
     "host": "nicknameinfotech.com",
     "dialect": "mysql"
   },
   "test": {
     "username": "u490757224_nickteachableu",
-    "password": "[a?yi[5Cw",
+    "password": "=SYhqf9u",
     "database": "u490757224_nickteachable",
     "host": "nicknameinfotech.com",
     "dialect": "mysql"
   },
   "production": {
     "username": "u490757224_nickteachableu",
-    "password": "[a?yi[5Cw",
+    "password": "=SYhqf9u",
     "database": "u490757224_nickteachable",
     "host": "nicknameinfotech.com",
     "dialect": "mysql"
