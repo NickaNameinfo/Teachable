@@ -171,7 +171,7 @@ const Login = () => {
                           rules={{ required: true }}
                           render={({ field }) => (
                             <input
-                              type="text"
+                              type="password"
                               className="common__login__input"
                               placeholder="Password"
                               {...field}
@@ -418,7 +418,7 @@ const Login = () => {
                 </div>
               </div>
               <div
-                className="tab-pane fade active show"
+                className="tab-pane fade active"
                 id="projects__three"
                 role="tabpanel"
                 aria-labelledby="projects__three"
