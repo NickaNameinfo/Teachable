@@ -23,28 +23,26 @@ const sharp = require("sharp");
 //   // Note: 'bucket' is not a valid AWS SDK configuration property
 // });
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage: storage });
 
 const BUCKET_NAME = "krosume";
 const s3 = new aws.S3();
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "./src/uploads");
-//   },
-//   filename: function (req, file, cb) {
-//     return cb(
-//       null,
-//       `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
-//     );
-//   },
-// });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./src/uploads");
+  },
+  filename: function (req, file, cb) {
+    return cb(
+      null,
+      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
+    );
+  },
+});
 
-const uploads = multer({
-  storage: storage,
-  limits: { fileSize: "1000000" },
-}).fields([{ name: "sessionUrl" }]);
+// const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 // const s3upload = multer({
 //   storage: multerS3({

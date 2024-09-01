@@ -150,7 +150,7 @@ const CourseList = () => {
                                       autoPlay={false}
                                     >
                                       <source
-                                        src={`${result?.uploadCourse}`}
+                                        src={`${infoData?.baseApi}/${result?.uploadCourse}`}
                                         type="video/mp4"
                                       />
                                       Your browser does not support the video
@@ -278,7 +278,7 @@ const CourseList = () => {
                                       autoPlay={false}
                                     >
                                       <source
-                                        src={`${result?.uploadCourse}`}
+                                        src={`${infoData?.baseApi}/${result?.uploadCourse}`}
                                         type="video/mp4"
                                       />
                                       Your browser does not support the video

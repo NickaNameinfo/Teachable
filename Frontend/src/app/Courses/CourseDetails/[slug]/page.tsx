@@ -155,7 +155,7 @@ const CourseDetails = ({ params }: { params: { slug: string } }) => {
         height="400"
         id={result?.id}
       >
-        <source src={`${result?.sessionUrl}`} type="video/mp4" />
+        <source src={`${infoData?.baseApi}/${result?.sessionUrl}`} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     );
@@ -224,7 +224,7 @@ const CourseDetails = ({ params }: { params: { slug: string } }) => {
                     autoPlay={true}
                   >
                     <source
-                      src={`${courseData?.data?.uploadCourse}`}
+                      src={`${infoData?.baseApi}/${courseData?.data?.uploadCourse}`}
                       type="video/mp4"
                     />
                     Your browser does not support the video tag.
@@ -728,7 +728,7 @@ const CourseDetails = ({ params }: { params: { slug: string } }) => {
                         playsInline={true}
                       >
                         <source
-                          src={`${courseData?.data?.uploadCourse}`}
+                          src={`${infoData?.baseApi}/${courseData?.data?.uploadCourse}`}
                           type="video/mp4"
                         />
                         Your browser does not support the video tag.

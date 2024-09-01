@@ -154,7 +154,7 @@ const CourseDetails = () => {
         id={result?.id}
       >
         <source
-          src={`${result?.sessionUrl}`}
+          src={`${infoData?.baseApi}/${result?.sessionUrl}`}
           type="video/mp4"
         />
         Your browser does not support the video tag.
@@ -225,7 +225,7 @@ const CourseDetails = () => {
                     autoPlay={true}
                   >
                     <source
-                      src={`${courseData?.data?.uploadCourse}`}
+                      src={`${infoData?.baseApi}/${courseData?.data?.uploadCourse}`}
                       type="video/mp4"
                     />
                     Your browser does not support the video tag.
@@ -729,7 +729,7 @@ const CourseDetails = () => {
                         playsInline={true}
                       >
                         <source
-                          src={`${courseData?.data?.uploadCourse}`}
+                          src={`${infoData?.baseApi}/${courseData?.data?.uploadCourse}`}
                           type="video/mp4"
                         />
                         Your browser does not support the video tag.

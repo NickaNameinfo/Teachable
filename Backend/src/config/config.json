@@ -7,10 +7,10 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "u490757224_nickteachableu",
-    "password": "=SYhqf9u",
-    "database": "u490757224_nickteachable",
-    "host": "nicknameinfotech.com",
+    "username": "root",
+    "password": "",
+    "database": "teachabledatabase",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "production": {

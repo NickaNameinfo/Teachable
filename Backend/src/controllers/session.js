@@ -57,27 +57,25 @@ const sessionController = {
     }
   },
   create: async (req, res, next) => {
-    console.log(req.body, "test123412341234");
-    const { originalname, buffer } = req?.file;
-    const uploadParams = {
-      Bucket: BUCKET_NAME, // Replace with your S3 bucket name
-      Key: originalname,
-      Body: buffer,
-    };
+    const { originalname, buffer, path } = req?.file;
+    // const uploadParams = {
+    //   Bucket: BUCKET_NAME, // Replace with your S3 bucket name
+    //   Key: originalname,
+    //   Body: buffer,
+    // };
 
     try {
-      const uploadCommand = new PutObjectCommand(uploadParams);
-      const result = await s3Client.send(uploadCommand);
-      const url = `https://${BUCKET_NAME}.s3.ap-south-1.amazonaws.com/${originalname}`;
-      console.log("File uploaded successfully:", url);
+      // const uploadCommand = new PutObjectCommand(uploadParams);
+      // const result = await s3Client.send(uploadCommand);
+      // const url = `https://${BUCKET_NAME}.s3.ap-south-1.amazonaws.com/${originalname}`;
+      // console.log("File uploaded successfully:", url);
       let inputData = {
         ...req.body,
-        sessionUrl: url,
+        sessionUrl: req?.file?.path,
       };
       const data = await sessionService.create(inputData);
       return res.json({ success: true, data });
     } catch (error) {
-      console.error("Error uploading file:", error);
       res.status(500).json({ success: false, message: "Error uploading file" });
     }
   },
