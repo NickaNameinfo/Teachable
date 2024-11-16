@@ -11,6 +11,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log(userInfo, "userInfo9870")
+
   const {
     handleSubmit: handleSubmitLogin,
     control: controlLogin,
@@ -27,7 +29,12 @@ const Login = () => {
   React.useEffect(() => {
     if (userInfo) {
       localStorage.setItem("loginInfo", JSON.stringify(userInfo));
-      navigate("/");
+      if(userInfo?.userName === "APGH1" || userInfo?.userName === "APGH2" || userInfo?.userName === "APGH3"|| userInfo?.userName === "APGH4"){
+        navigate("/MainQuiz");
+      }else{
+        navigate("/");
+      }
+      
     }
   }, [userInfo]);
 
