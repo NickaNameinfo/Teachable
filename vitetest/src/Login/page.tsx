@@ -26,7 +26,6 @@ const Login = () => {
 
   React.useEffect(() => {
     if (userInfo) {
-      console.log(userInfo, "userInfo231234");
       localStorage.setItem("loginInfo", JSON.stringify(userInfo));
       navigate("/");
     }

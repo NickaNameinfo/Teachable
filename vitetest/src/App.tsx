@@ -21,6 +21,7 @@ import HomePage from "./HomePage/page";
 import { useDispatch } from "react-redux";
 import { login } from "./Login/loginSlice";
 import React from "react";
+import MainQuiz from "./QuestionAnswer";
 function App() {
   const dispatch = useDispatch();
   const localData = localStorage.getItem("loginInfo");
@@ -43,6 +44,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Dashboard/Messages" element={<Messages />} />
         <Route path="/Dashboard/Course/CourseList" element={<CourseList />} />
+        <Route path="/MainQuiz" element={<MainQuiz />} />
         <Route
           path="/Dashboard/Course/CreateCourse"
           element={<CreateCourse />}

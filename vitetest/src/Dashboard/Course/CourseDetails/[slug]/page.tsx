@@ -19,7 +19,6 @@ const AdminCourseDetails = () => {
     let tempDate = sessionData?.["data"]?.data?.filter(
       (item) => item.courseId === courseData?.data?.id
     );
-    console.log(sessionList, "sessionsfdasd");
     setSessionsList(tempDate);
   }, [courseData]);
   return (
