@@ -11,6 +11,7 @@ const MainQuiz = () => {
   const [disabled, setDisabled] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const [questions, setQuestions] = useState("");
+  const [code, setCode] = useState("");
   const [answer, setAnswer] = useState("");
   const [timer, setTimer] = useState(null);
   const [allkMyAnswer, setAllMyAnswer] = useState([]);
@@ -21,6 +22,7 @@ const MainQuiz = () => {
     setQuestions(quizData[currentQuestion].question);
     setAnswer(quizData[currentQuestion].answer);
     setOptions(quizData[currentQuestion].options);
+    setCode(quizData[currentQuestion].code);
     setMyAnswer(null);
     setDisabled(true);
   };
@@ -64,7 +66,7 @@ const MainQuiz = () => {
     }
     if (currentQuestion < quizData.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
-      setTimer(15);
+      setTimer(20);
     } else {
       setIsEnd(true);
       sendEmail(); // Send email when quiz ends
@@ -129,7 +131,7 @@ const MainQuiz = () => {
     return (
       <div className="quationanswer text-center" style={{ height: "85vh" }}>
         <div>
-          <h3>Game Over. Your final score is {score} points.</h3>
+          <h3>Test Completed. Your final score is {score} points.</h3>
           <button className="ui inverted button mt-3">
             Your answers have been submitted successfully. Our team will contact
             you shortly.
@@ -147,20 +149,24 @@ const MainQuiz = () => {
       {timer ? (
         <div>
           <h1>{questions}</h1>
+          <code>{code}</code>
+          <br />
           <span>{`Questions ${currentQuestion + 1} of ${
             quizData.length
           }`}</span>
           <div className="timer">Time remaining: {timer} seconds</div>
           {options.map((option, index) => (
-            <p
-              key={index}
-              className={`ui floating message options ${
-                myAnswer === option ? "selected" : ""
-              }`}
-              onClick={() => checkAnswer(option)}
-            >
-              {option}
-            </p>
+            <>
+              <p
+                key={index}
+                className={`ui floating message options ${
+                  myAnswer === option ? "selected" : ""
+                }`}
+                onClick={() => checkAnswer(option)}
+              >
+                {option}
+              </p>
+            </>
           ))}
           {currentQuestion < quizData.length - 1 && (
             <button
@@ -190,7 +196,7 @@ const MainQuiz = () => {
                 padding: "15px",
                 width: "100%",
                 margin: "10px",
-                background : mailid ? "" : "#ff000017"
+                background: mailid ? "" : "#ff000017",
               }}
               onChange={(e) => setMailId(e.target.value)}
             />
@@ -199,7 +205,7 @@ const MainQuiz = () => {
             className="ui inverted button"
             onClick={() => {
               if (mailid) {
-                setTimer(15);
+                setTimer(20);
               } else {
                 alert("Please enter your mail id");
               }

@@ -76,9 +76,8 @@ If the cost increases by 25% but the selling price remains constant, approximate
   },
   {
     id: 4,
-    question: `Read the given C++ program carefully and choose the correct output from the given options:
-
-#include <iostream>  
+    question: `Read the given C++ program carefully and choose the correct output from the given options:`,
+    code: `#include <iostream>  
 #include <string>  
 using namespace std;  
 int main()  
@@ -110,9 +109,8 @@ int main()
   },
   {
     id: 7,
-    question: `Find the output of below C++ program? 
-
-#include<iostream>
+    question: `Find the output of below C++ program? `,
+    code: `#include<iostream>
 void Execute(int &x, int y = 200)
 {
  int TEMP = x + y;
@@ -151,13 +149,14 @@ II. In a procedure programming language, all the function calls are resolved at 
   },
   {
     id: 9,
-    question: `String str="Hello";
+    question: `
+The below code snap display______`,
+    code: `String str="Hello";
 int i;
 for(i = str.length() - 1; i >= 0; i--)
 {
     cout<<str[i];
-}
-The above code snap display______`,
+}`,
     options: [
       `A. Given String Hello`,
       `B. Given String ollH`,
