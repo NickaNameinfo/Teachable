@@ -66,7 +66,7 @@ const MainQuiz = () => {
     }
     if (currentQuestion < quizData.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
-      setTimer(30);
+      setTimer(60);
     } else {
       setIsEnd(true);
       sendEmail(); // Send email when quiz ends
@@ -205,7 +205,7 @@ const MainQuiz = () => {
             className="ui inverted button"
             onClick={() => {
               if (mailid) {
-                setTimer(30);
+                setTimer(60);
               } else {
                 alert("Please enter your mail id");
               }
